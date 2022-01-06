@@ -11,6 +11,7 @@
 
 # First Day 01/06
 <img src="./images/first_day.png">
+
 ## Flex를 사용하면서 어려웠던 점
 - 생각보다 초기 flex구조를 잡기가 힘들었다
 - `container`에 자주 사용됐던 속성 : `justify-content`, `align-items`, `flex-direction`
