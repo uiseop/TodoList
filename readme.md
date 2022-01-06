@@ -10,7 +10,7 @@
     - useEffect
 
 # First Day 01/06
-<img src="./images/first_day.png">
+<img src="./images/first_day.gif">
 
 ## Flex를 사용하면서 어려웠던 점
 - 생각보다 초기 flex구조를 잡기가 힘들었다
