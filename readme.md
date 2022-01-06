@@ -7,3 +7,4 @@
 - styled-components
 - Hooks
     - useState
+    - useEffect
