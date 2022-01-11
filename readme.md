@@ -43,7 +43,11 @@
 2-1. <del>`Remain`값들도 하나씩 줄여주도록 하자</del> 이건 `useMemo`에서 이미 처리됐겠다.
 
 # 01/11
-<img src="./images/third.png>
+<img src="./images/third.png"/>
+
+## 한 일
+- 추가/삭제 기능을 추가했습니다.
+- 체크박스의 위치를 조정했습니다. `align-self`를 통해 특정 요소의 반대측을 center로 맞춰주었습니다.
 
 ## 배운 점
 - 리액트에서 `label`태그의 for는 `htmlFor`로 작성해야한다는 사실
