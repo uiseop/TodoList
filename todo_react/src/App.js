@@ -12,20 +12,48 @@ function App() {
         return [totalCnt, totalRemain];
     }, [todos]);
 
-    function onClickHandler() {
+    function onClickHandler(e) {
+        e.preventDefault();
         const newTodos = [...todos];
         if (newInput.current.value) {
             const newTodo = {
-              title: newInput.current.value,
-              clear: false
-            }
+                title: newInput.current.value,
+                clear: false,
+            };
             newTodos.push(newTodo);
             setTodos(newTodos);
-            newTodo.current.value = "";
+            newInput.current.value = "";
         } else {
             alert("할일을 입력해주세요!!");
         }
     }
+
+    function onCheckHandler(idx) {
+        const newTodos = [...todos];
+        newTodos[idx].clear = !newTodos[idx].clear;
+        setTodos(newTodos);
+        console.log(newTodos);
+    }
+
+    const lists = todos.map((todo, idx) => (
+        <li className="list" key={idx}>
+            <input
+                id={`check${idx}`}
+                type="checkbox"
+                className="check"
+                onClick={() => onCheckHandler(idx)}
+            />
+            <label htmlFor={`check${idx}`}></label>
+            {todo.clear ? (
+                <span className="text clear">{todo.title}</span>
+            ) : (
+                <span className="text">{todo.title}</span>
+            )}
+            <button type="button" className="btn">
+                Delete
+            </button>
+        </li>
+    ));
 
     return (
         <Container>
@@ -34,32 +62,21 @@ function App() {
                 <span className="left">{totalRemain} Remain</span>
             </div>
             <div className="app_body">
-                <ul className="lists">
-                    <li className="list">
-                        <input id="check1" type="checkbox" className="check" />
-                        <label for="check1"></label>
-                        <span className="text">Something Here</span>
-                        <button type="button" className="btn">
-                            Delete
-                        </button>
-                    </li>
-                </ul>
+                <ul className="lists">{lists}</ul>
             </div>
-            <div className="app_form">
-                <input
-                    ref={newInput}
-                    type="text"
-                    className="add_text"
-                    placeholder="Add Todo.."
-                />
-                <button
-                    type="button"
-                    className="add_btn"
-                    onClick={onClickHandler}
-                >
-                    Add
-                </button>
-            </div>
+            <form onSubmit={onClickHandler}>
+                <div className="app_form">
+                    <input
+                        ref={newInput}
+                        type="text"
+                        className="add_text"
+                        placeholder="Add Todo.."
+                    />
+                    <button type="submit" className="add_btn">
+                        Add
+                    </button>
+                </div>
+            </form>
         </Container>
     );
 }
