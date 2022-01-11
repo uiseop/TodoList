@@ -17,6 +17,7 @@ function App() {
         const newTodos = [...todos];
         if (newInput.current.value) {
             const newTodo = {
+                key: new Date().getTime(),
                 title: newInput.current.value,
                 clear: false,
             };
@@ -46,19 +47,16 @@ function App() {
     }
 
     const lists = todos.map((todo, idx) => (
-        <li className="list" key={idx}>
+        <li className="list" key={todo.key} className={todo.clear ? "list clear" : "list"}>
             <input
                 id={`check${idx}`}
                 type="checkbox"
                 className="check"
+                checked={todo.clear}
                 onClick={() => onCheckHandler(idx)}
             />
             <label htmlFor={`check${idx}`}></label>
-            {todo.clear ? (
-                <span className="text clear">{todo.title}</span>
-            ) : (
-                <span className="text">{todo.title}</span>
-            )}
+            <span className="text">{todo.title}</span>
             <button type="button" className="btn" onClick={() => deleteHandler(idx)}>
                 Delete
             </button>

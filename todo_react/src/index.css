@@ -101,7 +101,7 @@ code {
   background-color: #fe9a8b;
 }
 
-.text.clear::after {
+.list.clear .text::after {
   width: 100%;
 }
 
