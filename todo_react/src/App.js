@@ -35,6 +35,16 @@ function App() {
         console.log(newTodos);
     }
 
+    function deleteHandler(idx) {
+        if(window.confirm(`${todos[idx].title}을(를) 삭제하시겠습니까?`)) {
+            const newTodos = [...todos];
+            newTodos.splice(idx,1);
+            setTodos(newTodos);
+            return
+        }
+        return
+    }
+
     const lists = todos.map((todo, idx) => (
         <li className="list" key={idx}>
             <input
@@ -49,7 +59,7 @@ function App() {
             ) : (
                 <span className="text">{todo.title}</span>
             )}
-            <button type="button" className="btn">
+            <button type="button" className="btn" onClick={() => deleteHandler(idx)}>
                 Delete
             </button>
         </li>
