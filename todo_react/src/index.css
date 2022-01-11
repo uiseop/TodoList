@@ -54,6 +54,10 @@ code {
   border-top: 1px solid #f5f4f4;
 }
 
+.list.clear .text::after {
+  width: 100%;
+}
+
 .check {
   display: none;
 }
@@ -101,10 +105,6 @@ code {
   background-color: #fe9a8b;
 }
 
-.list.clear .text::after {
-  width: 100%;
-}
-
 .btn {
   height: 40px;
 }
@@ -131,7 +131,7 @@ code {
   outline: none;
 }
 
-.add_btn, .btn {
+.add_btn, .btn, .add_btn:disabled {
   border: 1px solid #dce4ec;
   border-radius: 30px;
   flex: 0 0 95px;
@@ -146,3 +146,4 @@ code {
   font-size: 20px;
   color: #fff;
 }
+

@@ -5,6 +5,9 @@ import { useState, useMemo, useRef } from "react";
 function App() {
     const [todos, setTodos] = useState([]);
     const newInput = useRef(null);
+    const isLimited = useMemo(() => {
+        return todos.length >= 10
+    }, [todos])
 
     const [totalCnt, totalRemain] = useMemo(() => {
         const totalCnt = todos.length;
@@ -37,17 +40,21 @@ function App() {
     }
 
     function deleteHandler(idx) {
-        if(window.confirm(`${todos[idx].title}을(를) 삭제하시겠습니까?`)) {
+        if (window.confirm(`${todos[idx].title}을(를) 삭제하시겠습니까?`)) {
             const newTodos = [...todos];
-            newTodos.splice(idx,1);
+            newTodos.splice(idx, 1);
             setTodos(newTodos);
-            return
+            return;
         }
-        return
+        return;
     }
 
     const lists = todos.map((todo, idx) => (
-        <li className="list" key={todo.key} className={todo.clear ? "list clear" : "list"}>
+        <li
+            className="list"
+            key={todo.key}
+            className={todo.clear ? "list clear" : "list"}
+        >
             <input
                 id={`check${idx}`}
                 type="checkbox"
@@ -57,7 +64,11 @@ function App() {
             />
             <label htmlFor={`check${idx}`}></label>
             <span className="text">{todo.title}</span>
-            <button type="button" className="btn" onClick={() => deleteHandler(idx)}>
+            <button
+                type="button"
+                className="btn"
+                onClick={() => deleteHandler(idx)}
+            >
                 Delete
             </button>
         </li>
@@ -72,16 +83,18 @@ function App() {
             <div className="app_body">
                 <ul className="lists">{lists}</ul>
             </div>
+            {isLimited ? <FullDiv>※ 할일 목록이 너무 많습니다.</FullDiv> : null}
             <form onSubmit={onClickHandler}>
                 <div className="app_form">
                     <input
                         ref={newInput}
                         type="text"
                         className="add_text"
-                        placeholder="Add Todo.."
+                        placeholder={isLimited ? "Too much todos..." : "Add todo..."}
+                        disabled={isLimited}
                     />
-                    <button type="submit" className="add_btn">
-                        Add
+                    <button type="submit" className="add_btn" disabled={isLimited}>
+                        {isLimited ? "Full" : "Add"}
                     </button>
                 </div>
             </form>
@@ -100,5 +113,13 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
+
+const FullDiv = styled.div`
+    padding: 8px 16px;
+    border: 1px solid #FA466A;
+    background-color: #feecf0;
+    color: #FA466A;
+    margin-bottom: 16px;
+`
 
 export default App;
